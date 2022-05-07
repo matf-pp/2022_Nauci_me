@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ProfesorDashboardActivity : AppCompatActivity() {
 
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+    private var adapter: RecyclerView.Adapter<ProfessorRecyclerAdapter.ViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class ProfesorDashboardActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = layoutManager
 
-        adapter = RecyclerAdapter()
+        adapter = ProfessorRecyclerAdapter()
         recyclerView.adapter = adapter
 
         val btNewLesson: Button = findViewById(R.id.btNewLesson)

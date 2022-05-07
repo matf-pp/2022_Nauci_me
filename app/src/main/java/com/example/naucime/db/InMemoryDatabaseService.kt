@@ -22,6 +22,10 @@ class InMemoryDatabaseService : DatabaseService {
         return this.studentList
     }
 
+    override fun getLessons(): MutableList<Lesson> {
+        return lessonList
+    }
+
     override fun addLesson (lesson: Lesson) {
         lessonList.add(lesson)
         println("${lesson.name}, ${lesson.price}, ${lesson.professor.name}" )
@@ -35,11 +39,6 @@ class InMemoryDatabaseService : DatabaseService {
                 iterator.remove()
             }
         }
-//        for (l in lessonList){
-//            if(l.name == lesson.name && lesson.professor.email == l.professor.email){
-//                lessonList.remove(l)
-//            }
-//        }
     }
 
     override fun getLessonsByProfessor(professor: Professor) : MutableList<Lesson>{

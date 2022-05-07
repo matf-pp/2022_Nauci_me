@@ -59,17 +59,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+//      hardcode in memory data for easier testing
 
-        var professorMilos = Professor("Milos", "Delic", "milosdelic@gmail.com")
-        var professorDusan = Professor("Dusan", "Trifunovic", "dusmantrif@gmail.com")
+        var professorMilos = Professor("Milos", "Delic", "milosdelic@gmail.com") //pass: milos123
+        var professorPera = Professor("Pera", "Peric", "peraperic@gmail.com") // pass: pera123
+        var professorAna = Professor("Ana", "Anic", "anaanic@yahoo.com") // pass: ana123
 
         DatabaseServiceProvider.db.addProfessor(professorMilos)
-        DatabaseServiceProvider.db.addProfessor(professorDusan)
+        DatabaseServiceProvider.db.addProfessor(professorPera)
+        DatabaseServiceProvider.db.addProfessor(professorAna)
 
-        DatabaseServiceProvider.db.addLesson(Lesson("Napredna mata", 500, professorMilos))
-//        println(DatabaseServiceProvider.db.getLessonsByProfessor(professorMilos))
-//        DatabaseServiceProvider.db.removeLesson(Lesson("Napredna mata", 500, professorMilos))
-//        println(DatabaseServiceProvider.db.getLessonsByProfessor(professorMilos))
+        DatabaseServiceProvider.db.addLesson(Lesson("Diskretne stukture 1", 500, professorMilos))
+        DatabaseServiceProvider.db.addLesson(Lesson("Geometrija I smer", 600, professorPera))
+        DatabaseServiceProvider.db.addLesson(Lesson("Programiranje 1", 1000, professorAna))
+        DatabaseServiceProvider.db.addLesson(Lesson("Programiranje 2", 1100, professorAna))
     }
 }
 
