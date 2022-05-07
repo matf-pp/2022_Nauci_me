@@ -28,9 +28,11 @@ class InMemoryDatabaseService : DatabaseService {
     }
 
     override fun removeLesson(lesson: Lesson) {
-        for (l in lessonList){
-            if(l.name == lesson.name && lesson.professor.email == l.professor.email){
-                lessonList.remove(l)
+        val iterator = lessonList.iterator()
+        while(iterator.hasNext()) {
+            val l = iterator.next()
+            if(l.name == lesson.name && lesson.professor.email == l.professor.email) {
+                iterator.remove()
             }
         }
     }
@@ -76,6 +78,34 @@ class InMemoryDatabaseService : DatabaseService {
     override fun getSubscribedStudents(professor: Professor, lname:String): MutableList<Student> {
         var lesson = getCertainLesson(professor, lname)
         return lesson.subscribers
+    }
+
+    override fun getStudent(email :String): Student{
+        var iter = studentList.iterator()
+
+        while(iter.hasNext()){
+            var student = iter.next()
+            if(student.email == email){
+                return student
+            }
+        }
+        return Student("","","")
+    }
+
+    override fun addStudent(student: Student) {
+        this.studentList.add(student)
+        println("The ${student} is added")
+    }
+
+    override fun deleteSubscribedStudent(professor: Professor, lname: String, email: String) {
+        var student = getStudent(email)
+        var lesson = getCertainLesson(professor, lname)
+        var iterator = lesson.subscribers.iterator()
+        while(iterator.hasNext()){
+            var student = iterator.next()
+            if (student.email == email)
+                iterator.remove()
+        }
     }
 
 }
