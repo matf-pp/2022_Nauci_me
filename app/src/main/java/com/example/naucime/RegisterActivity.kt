@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.naucime.db.DatabaseServiceProvider
+import com.example.naucime.model.Professor
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
@@ -25,19 +27,28 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister:Button = findViewById(R.id.btnRegister)
         btnRegister.setOnClickListener {
 
+            val editName:EditText = findViewById(R.id.editName)
+            val editSurname:EditText = findViewById(R.id.editSurname)
             val editEmail:EditText = findViewById(R.id.editEmail)
             val editPassword:EditText = findViewById(R.id.editPassword)
             val editCPassword:EditText = findViewById(R.id.editCPassword)
 
-            if(editEmail.text.trim().isNotEmpty()
+            if(editName.text.trim().isNotEmpty() && editSurname.text.trim().isNotEmpty() && editEmail.text.trim().isNotEmpty()
                 && editPassword.text.trim().isNotEmpty() && editCPassword.text.trim().isNotEmpty()) {
-//                process data
+//              register to firebase
                 registerUser()
+
+//              add new professor user to memory
+                var professor = Professor(editName.text.trim().toString(), editSurname.text.trim().toString(), editEmail.text.trim().toString())
+                DatabaseServiceProvider.db.addProfessor(professor)
 
             } else {
                 Toast.makeText(this, "Input required", Toast.LENGTH_SHORT).show()
 
             }
+
+
+
         }
 
         val tvLogin:TextView = findViewById(R.id.tvLogin)

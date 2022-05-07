@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.example.naucime.db.DatabaseServiceProvider
+import com.example.naucime.model.Lesson
 import com.example.naucime.model.Professor
 import com.example.naucime.model.Test
 import kotlinx.serialization.decodeFromString
@@ -59,13 +60,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        var professorMilos = Professor("Milos", "Delic", "milosdelic@gmail.com")
+        var professorDusan = Professor("Dusan", "Trifunovic", "dusmantrif@gmail.com")
 
+        DatabaseServiceProvider.db.addProfessor(professorMilos)
+        DatabaseServiceProvider.db.addProfessor(professorDusan)
 
-        val newProfessor = Test("Pera", "Peric")
+        DatabaseServiceProvider.db.addLesson(Lesson("Napredna mata", 500, professorMilos))
 
-//        println(Json.encodeToString(newProfessor))
-        val test = Json.decodeFromString<Test>("""{name: "pera", language: "Peric"}""")
-        println(test.name)
     }
 }
 

@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.naucime.db.DatabaseServiceProvider
+import com.example.naucime.model.Professor
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -19,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+
         val btnLogin: Button = findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener{
 
@@ -28,6 +31,16 @@ class LoginActivity : AppCompatActivity() {
             if(etUsername.text.trim().isNotEmpty() && etPassword.text.trim().isNotEmpty()){
 //                process data
                 signInUser()
+
+                val user = auth.currentUser
+                var pEmail: String? = ""
+
+                if(user != null) {
+                    pEmail = user.email
+                } else {
+                    Toast.makeText(this,"Current user not found", Toast.LENGTH_LONG).show()
+                }
+
             } else {
                 Toast.makeText(this, "Input required", Toast.LENGTH_SHORT).show()
 
@@ -54,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
                         val intent = Intent(this, if (userType == "student") StudentDashboardActivity::class.java else ProfesorDashboardActivity::class.java)
                         startActivity(intent)
+
 
             } else {
                 Toast.makeText(this,"Authentication error " + task.exception, Toast.LENGTH_LONG).show()

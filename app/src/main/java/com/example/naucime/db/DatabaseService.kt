@@ -1,5 +1,6 @@
 package com.example.naucime.db
 
+import com.example.naucime.model.Lesson
 import com.example.naucime.model.Professor
 import com.example.naucime.model.Student
 
@@ -8,4 +9,12 @@ interface DatabaseService {
     fun connect() : DatabaseService
     fun getProfessors (): List<Professor>
     fun getStudents () : List<Student>
+    fun addLesson (lesson: Lesson)
+    fun removeLesson (lesson: Lesson)
+    fun getLessonsByProfessor (professor: Professor) : MutableList<Lesson>
+    fun getCertainLesson (professor: Professor, lname: String) : Lesson
+    fun addProfessor(professor: Professor)
+    fun getProfessor(email: String) : Professor
+    fun getSubscribedStudents(professor: Professor, lname: String): MutableList<Student>
+
 }

@@ -1,46 +1,38 @@
 package com.example.naucime.model
 
+import com.example.naucime.db.DatabaseServiceProvider
+import com.example.naucime.db.InMemoryDatabaseService
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-class Professor (id: Int, fName: String, lName: String){
+class Professor (fName: String, lName: String, pEmail: String){
 
-    var pId: Int
+    //FIXME: ne znam da li mi je potreban id profesora posto je broj telefona vec unikatan
+//    var pId: Int
     var name: String
     var lastName: String;
-    var contact: String = ""
+    var phoneNumber: String = ""
+    var email: String = ""
 
-    var lessons: MutableList<Lesson> = mutableListOf<Lesson>()
+//    var lessons: MutableList<Lesson> = mutableListOf<Lesson>()
 
 
     init{
-        pId = id
         name = fName
         lastName = lName
+        email = pEmail
     }
 
 
     fun addLesson(lname: String, lprice: Int){
         var l: Lesson = Lesson(lname, lprice, this)
-        this.lessons.add(l)
+        DatabaseServiceProvider.db.addLesson(l)
     }
 
-    fun removeLessonByName(lName: String){
-        for(l in lessons){
-            if (l.name == lName)
-                lessons.remove(l)
-        }
+    override fun toString() : String {
+        return this.name + ", " + this.lastName + ", " + this.email
     }
-
-    fun getLessonByName(lname: String) : Lesson? {
-        for (l in lessons){
-            if(lname == l.name)
-                return l
-        }
-        return null
-    }
-
 
 
 
