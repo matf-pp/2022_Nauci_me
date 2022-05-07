@@ -67,7 +67,9 @@ class MainActivity : AppCompatActivity() {
         DatabaseServiceProvider.db.addProfessor(professorDusan)
 
         DatabaseServiceProvider.db.addLesson(Lesson("Napredna mata", 500, professorMilos))
-
+//        println(DatabaseServiceProvider.db.getLessonsByProfessor(professorMilos))
+//        DatabaseServiceProvider.db.removeLesson(Lesson("Napredna mata", 500, professorMilos))
+//        println(DatabaseServiceProvider.db.getLessonsByProfessor(professorMilos))
     }
 }
 

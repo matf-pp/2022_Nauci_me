@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btDelete"
             android:layout_width="45dp"
             android:layout_height="39dp"
@@ -48,9 +48,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tvLessonName"
             app:layout_constraintLeft_toRightOf="@+id/tvLessonPrice"
             app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_delete"
             android:backgroundTint="@color/white"
-            android:text="X"
-            android:textColor="@color/black"
             />
         <TextView
             android:id="@+id/tvProfessorContact"

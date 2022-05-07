@@ -1,12 +1,20 @@
 package com.example.naucime
 
+import android.app.usage.UsageEvents
+import android.content.Context
+import android.content.Intent
+import android.media.metrics.Event
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naucime.db.DatabaseServiceProvider
+import com.example.naucime.model.Lesson
 import com.google.firebase.auth.FirebaseAuth
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
@@ -15,12 +23,14 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     private var user = auth.currentUser
     private val professor = DatabaseServiceProvider.db.getProfessor(user?.email.toString())
     private val lessons = DatabaseServiceProvider.db.getLessonsByProfessor(professor)
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
+        context = parent.context
         return ViewHolder(v)
     }
 
@@ -28,6 +38,17 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         holder.tvLessonName.text = lessons[position].name
         holder.tvLessonPrice.text = lessons[position].price.toString()
         holder.tvProfessorContact.text = user?.email
+        holder.btDelete.setOnClickListener {
+            val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
+
+            println("Delete clicked for " + lesson.name)
+            val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
+            DatabaseServiceProvider.db.removeLesson(lesson)
+            println(DatabaseServiceProvider.db.getLessonsByProfessor(professor))
+            val intent = Intent(context,ProfesorDashboardActivity::class.java)
+            context.startActivity(intent)
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,7 +60,7 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         var tvLessonName: TextView
         var tvLessonPrice: TextView
         var tvProfessorContact: TextView
-        var btDelete: Button
+        var btDelete: ImageButton
 
         init {
             tvLessonName = itemView.findViewById(R.id.tvLessonName)
