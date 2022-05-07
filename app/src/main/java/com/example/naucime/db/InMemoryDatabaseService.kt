@@ -22,6 +22,10 @@ class InMemoryDatabaseService : DatabaseService {
         return this.studentList
     }
 
+    override fun getLessons(): MutableList<Lesson> {
+        return lessonList
+    }
+
     override fun addLesson (lesson: Lesson) {
         lessonList.add(lesson)
         println("${lesson.name}, ${lesson.price}, ${lesson.professor.name}" )

@@ -31,7 +31,7 @@ class AddLessonActivity : AppCompatActivity() {
 
         val btnAddNewLesson: Button = findViewById(R.id.btAddNewLesson)
         btnAddNewLesson.setOnClickListener{
-//            todo: dodati btton za cenu
+
             var les: EditText = findViewById(R.id.etLessonName)
             var lname:String = les.text.trim().toString()
 

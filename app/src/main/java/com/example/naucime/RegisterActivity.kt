@@ -70,6 +70,8 @@ class RegisterActivity : AppCompatActivity() {
             task -> if(task.isSuccessful) {
 
                 Toast.makeText(this,"Register successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
 
             } else {
 

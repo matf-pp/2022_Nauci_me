@@ -9,6 +9,7 @@ interface DatabaseService {
     fun connect() : DatabaseService
     fun getProfessors (): List<Professor>
     fun getStudents () : List<Student>
+    fun getLessons(): MutableList<Lesson>
     fun addLesson (lesson: Lesson)
     fun removeLesson (lesson: Lesson)
     fun getLessonsByProfessor (professor: Professor) : MutableList<Lesson>

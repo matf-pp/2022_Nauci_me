@@ -5,8 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Student (sName: String, sLastName: String, sEmail: String) {
+
     var name: String;
     var lastName: String;
+
+
     var email: String
 
     init {
@@ -15,8 +18,8 @@ class Student (sName: String, sLastName: String, sEmail: String) {
         email = sEmail
     }
 
-    fun subscribeToLesson(lname: String, professor: Professor) {
-        var lesson = DatabaseServiceProvider.db.getCertainLesson(professor, lname)
+
+    fun subscribeToLesson(lesson: Lesson) {
         lesson.subscribers.add(this)
     }
 
