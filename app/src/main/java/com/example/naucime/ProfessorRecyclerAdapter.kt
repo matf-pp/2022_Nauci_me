@@ -33,15 +33,18 @@ class ProfessorRecyclerAdapter: RecyclerView.Adapter<ProfessorRecyclerAdapter.Vi
         holder.tvLessonName.text = lessons[position].name
         holder.tvLessonPrice.text = lessons[position].price.toString()
         holder.tvProfessorContact.text = user?.email
+
+        val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
         holder.btDelete.setOnClickListener {
             val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
-            val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
+
 
             DatabaseServiceProvider.db.removeLesson(lesson)
 
             val intent = Intent(context,ProfesorDashboardActivity::class.java)
             context.startActivity(intent)
         }
+
     }
 
     override fun getItemCount(): Int {

@@ -18,7 +18,7 @@ interface DatabaseService {
     fun getProfessor(email: String) : Professor
     fun getSubscribedStudents(professor: Professor, lname: String): MutableList<Student>
     fun deleteSubscribedStudent(professor: Professor, lname: String, email: String)
-    fun getStudent(email: String): Student
+    fun getStudent(email: String?): Student
     fun addStudent(student: Student)
 
 }

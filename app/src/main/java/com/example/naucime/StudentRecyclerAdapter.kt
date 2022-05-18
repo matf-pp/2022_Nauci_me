@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naucime.db.DatabaseServiceProvider
 import com.example.naucime.model.Lesson
-import com.example.naucime.model.Student
 import com.google.firebase.auth.FirebaseAuth
 
 class StudentRecyclerAdapter: RecyclerView.Adapter<StudentRecyclerAdapter.ViewHolder>() {
@@ -38,7 +37,9 @@ class StudentRecyclerAdapter: RecyclerView.Adapter<StudentRecyclerAdapter.ViewHo
             val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
             val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
 
-//            todo: implament getstudent by email, create student, subscribe student to lesson
+            val student = DatabaseServiceProvider.db.getStudent(user?.email)
+            student.subscribeToLesson(lesson)
+//            println("subscribovao sam se na lekciju " + lesson.name)
 
             val intent = Intent(context,StudentDashboardActivity::class.java)
             context.startActivity(intent)

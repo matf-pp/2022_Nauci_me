@@ -84,7 +84,7 @@ class InMemoryDatabaseService : DatabaseService {
         return lesson.subscribers
     }
 
-    override fun getStudent(email :String): Student{
+    override fun getStudent(email: String?): Student{
         var iter = studentList.iterator()
 
         while(iter.hasNext()){
