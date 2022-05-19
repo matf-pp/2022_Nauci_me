@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NauciMe">
         <activity
+            android:name=".SubscribedStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddLessonActivity"
             android:exported="false" />
         <activity

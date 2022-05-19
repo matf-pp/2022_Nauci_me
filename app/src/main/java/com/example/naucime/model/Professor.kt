@@ -8,15 +8,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 class Professor (fName: String, lName: String, pEmail: String){
 
-    //FIXME: ne znam da li mi je potreban id profesora posto je broj telefona vec unikatan
-//    var pId: Int
     var name: String
     var lastName: String;
-    var phoneNumber: String = ""
     var email: String = ""
-
-//    var lessons: MutableList<Lesson> = mutableListOf<Lesson>()
-
 
     init{
         name = fName

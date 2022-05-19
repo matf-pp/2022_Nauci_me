@@ -16,5 +16,7 @@ class Lesson constructor(lName: String, lPrice: Int, sProfessor: Professor){
 
     var subscribers : MutableList<Student> = mutableListOf<Student>()
 
-
+    override fun toString() :String {
+        return this.name + ", " + this.price + ", " + this.professor
+    }
 }

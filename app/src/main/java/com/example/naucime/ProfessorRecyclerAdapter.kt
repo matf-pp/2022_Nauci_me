@@ -35,13 +35,19 @@ class ProfessorRecyclerAdapter: RecyclerView.Adapter<ProfessorRecyclerAdapter.Vi
         holder.tvProfessorContact.text = user?.email
 
         val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
+        val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
+
         holder.btDelete.setOnClickListener {
-            val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
-
-
             DatabaseServiceProvider.db.removeLesson(lesson)
 
             val intent = Intent(context,ProfesorDashboardActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        holder.tvLessonName.setOnClickListener {
+            val intent = Intent(context, SubscribedStudentsActivity::class.java)
+            intent.putExtra("professorEmail", professor.email)
+            intent.putExtra("lessonName", lesson.name)
             context.startActivity(intent)
         }
 

@@ -1,14 +1,13 @@
 package com.example.naucime
 
 import android.content.Intent
+import android.database.DatabaseErrorHandler
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.naucime.db.DatabaseServiceProvider
 import com.example.naucime.model.Professor
+import com.example.naucime.model.Student
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -50,7 +49,16 @@ class LoginActivity : AppCompatActivity() {
         val tvRegister: TextView = findViewById(R.id.tvRegister)
         tvRegister.setOnClickListener {
 
+            val userType: String = intent.getStringExtra("userType").toString()
+
             val intent = Intent(this, RegisterActivity::class.java)
+            intent.putExtra("userType", userType)
+            startActivity(intent)
+        }
+
+        val imgBtnLogout: ImageButton = findViewById(R.id.imgBtnLogout)
+        imgBtnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -64,6 +72,18 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(etUsername.text.trim().toString(),etPassword.text.trim().toString())
             .addOnCompleteListener(this) {
                     task -> if (task.isSuccessful) {
+                        var professor = DatabaseServiceProvider.db.getProfessor(etUsername.text.trim().toString())
+                        var student = DatabaseServiceProvider.db.getStudent(etUsername.text.trim().toString())
+
+                //postojim kao profesor a ulazim kao student
+                        if(professor.email != "" && userType == "student") {
+                            var student = Student(professor.name, professor.lastName, etUsername.text.trim().toString());
+                            DatabaseServiceProvider.db.addStudent(student)
+                        }
+                        else if(student.email != "" && userType == "profesor"){
+                            var professorNew = Professor(student.name, student.lastName, etUsername.text.trim().toString())
+                            DatabaseServiceProvider.db.addProfessor(professorNew)
+                        }
 
                         val intent = Intent(this, if (userType == "student") StudentDashboardActivity::class.java else ProfesorDashboardActivity::class.java)
                         startActivity(intent)
@@ -71,22 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
             } else {
                 Toast.makeText(this,"Authentication error " + task.exception, Toast.LENGTH_LONG).show()
-
-            }
+                }
             }
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//
-//        val user = auth.currentUser
-//
-////        if (user != null) {
-////
-////            val intent = Intent(this, DashboardActivity::class.java)
-////            startActivity(intent)
-////        } else {
-////            Toast.makeText(this,"User first time login", Toast.LENGTH_LONG)
-////        }
-//    }
 }

@@ -4,6 +4,8 @@ import com.example.naucime.model.Lesson
 import com.example.naucime.model.Professor
 import com.example.naucime.model.Student
 
+private var firstTimeIn: Boolean = true
+
 class InMemoryDatabaseService : DatabaseService {
 
     var professorList : MutableList<Professor> = mutableListOf()
@@ -28,7 +30,7 @@ class InMemoryDatabaseService : DatabaseService {
 
     override fun addLesson (lesson: Lesson) {
         lessonList.add(lesson)
-        println("${lesson.name}, ${lesson.price}, ${lesson.professor.name}" )
+        println("AddLesson function: ${lesson.name}, ${lesson.price}, ${lesson.professor.email}" )
     }
 
     override fun removeLesson(lesson: Lesson) {
@@ -52,7 +54,7 @@ class InMemoryDatabaseService : DatabaseService {
 
     override fun addProfessor(professor: Professor) {
         professorList.add(professor)
-        println(professorList)
+        println("addProfessor function: " + professorList)
     }
 
     override fun getProfessor(email: String): Professor {
@@ -71,15 +73,14 @@ class InMemoryDatabaseService : DatabaseService {
         var tmp = Lesson("", -1, Professor("", "", ""))
         for (l in lessons){
             if(l.name == lname){
-                tmp = l
-                break;
+                return l
             }
         }
         return tmp
-
     }
 
-    override fun getSubscribedStudents(professor: Professor, lname:String): MutableList<Student> {
+    override fun getSubscribedStudents(pEmail: String, lname:String): MutableList<Student> {
+        var professor = getProfessor(pEmail)
         var lesson = getCertainLesson(professor, lname)
         return lesson.subscribers
     }
@@ -109,6 +110,48 @@ class InMemoryDatabaseService : DatabaseService {
             var student = iterator.next()
             if (student.email == email)
                 iterator.remove()
+        }
+    }
+
+    override fun subscribeToLesson(lesson: Lesson, student: Student): Boolean {
+        if(lesson.professor.email != student.email) {
+            lesson.subscribers.add(student)
+            return true
+        }
+        else
+            return false
+    }
+
+    override fun dataInit() {
+
+        if(firstTimeIn) {
+            var professorMilos =
+                Professor("Milos", "Delic", "milosdelic@gmail.com") //pass: milos123
+            var professorPera = Professor("Pera", "Peric", "peraperic@gmail.com") // pass: pera123
+            var professorAna = Professor("Ana", "Anic", "anaanic@yahoo.com") // pass: ana123
+
+            DatabaseServiceProvider.db.addProfessor(professorMilos)
+            DatabaseServiceProvider.db.addProfessor(professorPera)
+            DatabaseServiceProvider.db.addProfessor(professorAna)
+
+            DatabaseServiceProvider.db.addLesson(
+                Lesson(
+                    "Diskretne strukture 1",
+                    500,
+                    professorMilos
+                )
+            )
+            DatabaseServiceProvider.db.addLesson(Lesson("Geometrija I smer", 600, professorPera))
+            DatabaseServiceProvider.db.addLesson(Lesson("Programiranje 1", 1000, professorAna))
+            DatabaseServiceProvider.db.addLesson(Lesson("Programiranje 2", 1100, professorAna))
+
+            var studentMirko: Student = Student("Mirko", "Kordic", "mirko@gmail.com")
+            addStudent(studentMirko)
+            var lessonDS: Lesson =
+                DatabaseServiceProvider.db.getCertainLesson(professorMilos, "Diskretne strukture 1")
+            studentMirko.subscribeToLesson(lessonDS)
+
+            firstTimeIn = false
         }
     }
 

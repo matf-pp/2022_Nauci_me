@@ -35,13 +35,14 @@ class StudentRecyclerAdapter: RecyclerView.Adapter<StudentRecyclerAdapter.ViewHo
         holder.tvProfessorContact.text = lessons[position].professor.email
         holder.btSubscribe.setOnClickListener {
             val professor = DatabaseServiceProvider.db.getProfessor(holder.tvProfessorContact.text.toString())
-            val lesson = Lesson(holder.tvLessonName.text.toString(),holder.tvLessonPrice.text.toString().toInt(),professor)
+            val lesson = DatabaseServiceProvider.db.getCertainLesson(professor, holder.tvLessonName.text.toString())
 
             val student = DatabaseServiceProvider.db.getStudent(user?.email)
-            student.subscribeToLesson(lesson)
-//            println("subscribovao sam se na lekciju " + lesson.name)
+            var uspeh = DatabaseServiceProvider.db.subscribeToLesson(lesson, student)
+            println("Subscribovao sam se na lekciju " + lesson.name)
 
-            val intent = Intent(context,StudentDashboardActivity::class.java)
+            val intent = Intent(context,ConfirmationActivity::class.java)
+            intent.putExtra("uspeh", uspeh)
             context.startActivity(intent)
         }
     }
@@ -63,7 +64,6 @@ class StudentRecyclerAdapter: RecyclerView.Adapter<StudentRecyclerAdapter.ViewHo
             tvProfessorContact = itemView.findViewById(R.id.tvProfessorContact)
             btSubscribe = itemView.findViewById(R.id.btSubscribe)
         }
-
     }
 }
 

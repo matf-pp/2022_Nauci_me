@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.example.naucime.db.DatabaseServiceProvider
 import com.example.naucime.model.Lesson
@@ -42,6 +43,12 @@ class AddLessonActivity : AppCompatActivity() {
             DatabaseServiceProvider.db.addLesson(Lesson(lname, lprice.toInt(), professor))
 
             val intent = Intent(this, ProfesorDashboardActivity::class.java)
+            startActivity(intent)
+        }
+
+        val imgBtnLogout: ImageButton = findViewById(R.id.imgBtnLogout)
+        imgBtnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

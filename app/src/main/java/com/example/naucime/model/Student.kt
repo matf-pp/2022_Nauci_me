@@ -24,7 +24,7 @@ class Student (sName: String, sLastName: String, sEmail: String) {
     }
 
     override fun toString() :String {
-        return this.name + ", " + this.lastName + ", " + this.email
+        return this.name + " " + this.lastName + " - kontakt: " + this.email
     }
 
 }

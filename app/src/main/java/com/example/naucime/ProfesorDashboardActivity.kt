@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,6 +29,12 @@ class ProfesorDashboardActivity : AppCompatActivity() {
         btNewLesson.setOnClickListener {
 
             val intent = Intent(this, AddLessonActivity::class.java)
+            startActivity(intent)
+        }
+
+        val imgBtnLogout: ImageButton = findViewById(R.id.imgBtnLogout)
+        imgBtnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

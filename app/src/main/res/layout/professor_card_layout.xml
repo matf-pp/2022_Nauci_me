@@ -27,6 +27,7 @@
             android:layout_height="39dp"
             android:layout_margin="16dp"
             android:textSize="30sp"
+            android:clickable="true"
             android:fontFamily="@font/advent_pro_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +79,6 @@
             android:textSize="15sp"
             android:fontFamily="@font/advent_pro_semibold"
             app:layout_constraintTop_toBottomOf="@id/tvLessonPrice" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

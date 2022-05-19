@@ -1,7 +1,9 @@
 package com.example.naucime
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,5 +22,11 @@ class StudentDashboardActivity : AppCompatActivity() {
 
         adapter = StudentRecyclerAdapter()
         recyclerView.adapter = adapter
+
+        val imgBtnLogout: ImageButton = findViewById(R.id.imgBtnLogout)
+        imgBtnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
