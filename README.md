@@ -26,7 +26,7 @@ Aplikacija je napisana u [Kotlin-u](https://kotlinlang.org/) u razvojnom okruže
 
 ---
 
-##Početna stranica
+## Početna stranica
 
 ![startup](https://user-images.githubusercontent.com/92266151/169407674-ddf80ccf-6ff0-46b0-b076-8a583dedbd63.png)
 
