@@ -31,7 +31,26 @@ Aplikacija je napisana u [Kotlin-u](https://kotlinlang.org/) u razvojnom okruže
 ![startup](https://user-images.githubusercontent.com/92266151/169407674-ddf80ccf-6ff0-46b0-b076-8a583dedbd63.png)
 
 ---
+## Prijava
 
+![login](https://user-images.githubusercontent.com/92266151/169408089-aadeca09-bedf-4186-a3d5-90fd3565f8e7.png)
+
+---
+## Pregled časova profesora
+
+![pregledCasovaProfesor](https://user-images.githubusercontent.com/92266151/169408108-27d1f7f9-cd9f-42e2-a843-d4162e188ea3.png)
+
+---
+
+## Pregled dostupnih časova
+
+![pregledCasovaStudent](https://user-images.githubusercontent.com/92266151/169408120-a01f06d4-f9a7-45e5-8897-f19b127c421c.png)
+
+---
+
+## Dodavanje novog časa
+
+![noviCas](https://user-images.githubusercontent.com/92266151/169408133-899f3cf8-eeba-47ba-913a-8e2d4125a01d.png)
 
 ---
 
