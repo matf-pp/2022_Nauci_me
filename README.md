@@ -23,6 +23,7 @@ Aplikacija je napisana u [Kotlin-u](https://kotlinlang.org/) u razvojnom okruže
 
 ## Upotreba
 
+Aplikaciju možete preuzeti [ovde](https://drive.google.com/file/d/1lFW7hiPw68oiIZ7hYD4X4SqAjUz19w-a/view?usp=drivesdk)
 
 ---
 
