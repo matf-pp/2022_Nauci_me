@@ -23,7 +23,7 @@ Aplikacija je napisana u [Kotlin-u](https://kotlinlang.org/) u razvojnom okruže
 
 ## Upotreba
 
-
+Aplikaciju skiuti [ovde](https://drive.google.com/file/d/14pb9v2no_v6QYzPSWAT0sEVHe52W4Uqc/view?usp=sharing)
 ---
 
 ## Početna stranica
